@@ -1,0 +1,241 @@
+Replier (
+	// Source format
+	- This file defines the Replier First subset for pre-programming.
+	- Use only the forms established by this tour before implementation begins.
+	- Emit anchors for descriptive content instead of comments.
+	- Use double-slash comments only as short headings that group anchors.
+	- Use comment headings to break up long runs of anchors.
+	- Do not place semantic content in comment headings.
+	- An anchor starts with a dash and is semantic content within the declaration it describes.
+	- The compiler reads an anchor in its enclosing declaration's context.
+	- An anchor governs the declaration that directly encloses it.
+	- An anchor records an accepted project decision that constrains later code generation.
+	- An imperative anchor is an executable instruction that can be replaced by code at its exact source position.
+	- Write imperative anchors as commands that begin with verbs such as Load instead of third-person descriptions such as Loads.
+	- Place imperative anchors only inside a function, constructor, or startup body where their replacement code can execute.
+	- Imperative anchors and code in the same body execute in source order.
+	- A declarative anchor states a fact, invariant, interpretation, or generation constraint instead of an executable instruction.
+	- Declarative anchors guide the implementation and are not placeholders for code at their source position.
+	- Use declarative wording when an anchor governs its enclosing declaration generally rather than directing an action at that position.
+	- A pending question anchor marks a material choice that code generation cannot safely infer without review.
+	- Accepting a pending question replaces it with a factual anchor that holds generation to the chosen decision.
+	- Do not use question anchors for syntax repairs, generic suggestions, or merely possible implementation alternatives.
+	- Place a member's behavior and invariants inside that member instead of its parent.
+	- Place an anchor governing a function inside that function's parenthesized body.
+	- Do not repeat the enclosing declaration's name in its anchors.
+	- Brace-delimited names in an anchor are semantic references to declarations.
+	- Reference declarations such as {WebViewHandle} instead of spelling their names in anchor prose.
+	- Each anchor contains one concise factual statement.
+	- Do not wrap anchor statements across lines.
+	- Do not use parentheses for ordinary prose in anchors.
+	
+	// Formatting
+	- Blank lines retain the indentation of their surrounding scope.
+	- Do not trim whitespace-only blank lines.
+	- Preserved blank-line indentation keeps vertical caret movement in its local column.
+	- Commas and newlines are interchangeable separators.
+	- Multiple commas, multiple newlines, and mixed comma-newline runs collapse into one separation unit.
+	- Prefer newline separation without commas when a parameter, argument, case payload, or other comma-separated list is split across lines.
+	
+	// Decision rules
+	- Public visibility is the default.
+	- Use private for private visibility.
+	- Do not use static.
+	- Ask Paul when a requirement, construct, semantic rule, API shape, or ownership decision is uncertain.
+	- Do not invent language features or widen this subset without direction.
+	- Do not substitute a familiar TypeScript rule unless this tour establishes it.
+	- Organize First by responsibility instead of source file.
+	- A space is a named responsibility boundary.
+	- Nest spaces instead of encoding hierarchy in names.
+	- A declaration without a constructor or inheritance clause is a space.
+	- A same-named space beside a class is that class's static side.
+	- Place a class's static-side space after its instance-side class.
+	
+	// Standard library
+	- The standard library includes JavaScript and Node.js built-ins when implementation work is enabled.
+	- The TypeScript frontend includes browser DOM APIs when implementation work is enabled.
+	- Use the ordinary conceptual APIs of standard library built-ins unless a First-specific rule changes them.
+	- A template element parses assigned HTML into an inert DocumentFragment.
+	- Is introduces types.
+	- A function's parenthesized body encloses its anchors and implementation.
+	- Add a parenthesized body when a function needs anchors or an implementation.
+	- Imports and package access are deferred.
+	
+	// Primitive types
+	- Primitive types are explicit.
+	- Do not use number for durable data or foreign boundaries when an exact representation is intended.
+	- Scalar types are boolean, string, byte string, and char.
+	- Integer types are i8, i16, i32, i64, i128, u8, u16, u32, u64, and u128.
+	- Choose a concrete integer width for durable data and foreign boundaries.
+	- Platform aliases int, uint, decimal, and udecimal select target-platform widths.
+	- Number is always f64.
+	- Numeric is a compile-time provisional numeric annotation instead of a runtime type.
+	- Float types are f16, f32, f64, and f128.
+	- A decimal literal is a provisional fixed decimal.
+	- Append f for f32 literals.
+	- Append ff for f64 literals.
+	- Fixed decimals use an integer width followed by a scale.
+	- Fixed decimal scales are i8 or u8 from 1 through 3, i16 or u16 from 1 through 5, i32 or u32 from 1 through 10, i64 or u64 from 1 through 19, and i128 or u128 from 1 through 39.
+	- Big is an arbitrary-precision signed integer.
+	- Big fixed decimal scales range from 1 through 64.
+	- Fixed-width integers and fixed decimals wrap on overflow.
+	
+	formatDocumentName(username is string) is string (
+		- Functions have lowercase names and typed parameters.
+		- A function return type is optional when reachable returns make it unambiguous.
+		- Functions are the reusable executable behavior in this subset.
+		return username + ".replier"
+	)
+	
+	placeView(
+		x is f64 = ?
+		y is f64 = ?
+		width is f64 = ?
+		height is f64 = ?
+		allowsFileAccess is boolean = false
+		escapable is boolean = false) (
+		- Multiline parameter lists use newlines as separators and do not need comma tokens.
+	)
+	
+	startup (
+		- Startup is automatic program startup.
+		- Startup has no name, parameters, return type, or call syntax.
+		- Place startup beside its owning space.
+		- Program-owned startup functions run in program order.
+		- Program-owned startup functions do not run when the entry point is a test.
+		Launcher.present()
+	)
+	
+	Launcher (
+		- Spaces hold responsibility-scoped functions, types, values, starters, and nested spaces.
+		- Access spaces by qualification.
+		- Spaces cannot be constructed.
+		present() (
+		)
+	)
+	
+	WebView (
+		- Private members are accessible only within the class.
+		- Async functions use is async and specify a non-null result type after async.
+		- First does not use Promise types.
+		- Omit a function body when declaring an API shape only.
+		constructor
+		reload()
+		loadLabel() is async string
+	)
+	
+	WebView (
+		- This same-named space is WebView's static side.
+		- Static-side spaces do not have constructors.
+		createHidden() is WebView
+	)
+	
+	Document (
+		- A declaration with constructor is a nominal reference class.
+		- Calling a class creates a value.
+		- First has no new keyword.
+		- A class has at most one constructor.
+		- Constructors can explicitly return a compatible instance.
+		- Constructors do not have visibility modifiers.
+		- Constructors can omit their bodies when declaring class shape only.
+		- Stored fields declare state owned by each instance.
+		- Every stored field is definitely assigned by the end of construction.
+		- A constructor parameter with is field of Type declares and assigns the same-named stored field.
+		- Field parameters replace explicit constructor copies for their stored fields.
+		status is DocumentStatus
+		
+		constructor(
+			identifier is field of string
+			accountName is field of string) (
+			this.status = DocumentStatus.open()
+		)
+		
+		close() (
+			- Instance functions use this for the current value.
+			this.status = DocumentStatus.closed()
+		)
+	)
+
+	Persistable (
+		- Database writes require an explicit persistence operation.
+		constructor
+	)
+
+	Post is Persistable (
+		- A post stores one captured X post.
+		- Inherits the database-write rule from {Persistable}.
+
+		constructor(identifier is field of string)
+	)
+
+	CaptureWatch (
+		- A capture watch repeatedly reads one source.
+		constructor(source is field of string)
+
+		start() (
+			- Calling start begins repeated reads from {source}.
+		)
+
+		stop() (
+			- Calling stop prevents further reads after it returns.
+		)
+	)
+	
+	WebViewHandle (
+		- Declare stored state explicitly and initialize matching fields with constructor field parameters.
+		constructor(identifier is field of string)
+	)
+	
+	DocumentStatus is one case of (
+		- One case of models a closed lifecycle or result shape.
+		- Each case is a constructor.
+		- A value has exactly one active case.
+		- Cases can carry typed payloads.
+		- Match cases when computation syntax is enabled.
+		opening()
+		open()
+		authenticationRequired()
+		accountMismatch(expected is string, authenticated is string)
+		closed()
+	)
+	
+	WebViewPresentation is one of (
+		- One of models one named identity.
+		- Entries can have explicit primitive values.
+		- Entries without values are inferred.
+		- Use one of for a closed single choice.
+		hidden
+		visible
+	)
+	
+	WebViewOpacity is one of (
+		- One of constrains one primitive value from a closed set.
+		- Raw values in the set are compatible.
+		- The declaration provides named access to set values.
+		0
+		1
+	)
+	
+	WebViewCapability is many of (
+		- Many of models zero or more named flags.
+		- Entries without values are inferred as powers of two.
+		- Include none when the empty state needs a named value.
+		none
+		load
+		evaluateJavaScript
+		resize
+		move
+		dispose
+	)
+	
+	WebViewRelation (
+		- Ownership belongs in stored field types instead of ordinary parameters or local variables.
+		- Weak does not retain its target and can become null.
+		- Strong explicitly acknowledges a potentially retaining cycle.
+		constructor(
+			owner is field of weak Document
+			peer is field of strong WebViewHandle)
+	)
+	
+	- Do not use imports, extension classes, primitive classes, properties, ghosts, advanced selection composition, or unintroduced computation and control flow.
+)
