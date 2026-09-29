@@ -1,1 +1,1 @@
-Coding skill for First
+Reusable Codex skill for writing First structural code.
