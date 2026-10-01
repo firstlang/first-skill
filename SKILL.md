@@ -1,13 +1,13 @@
 ---
 name: first-code
-description: Write or revise First source in the current structural subset, using the local tour and references to avoid invented syntax.
+description: Write or revise First source, scaffold First-backed projects, and keep implementation work aligned with src-first.
 metadata:
   short-description: Write First structural code
 ---
 
 # First Code
 
-Use this skill when the user asks for First source, First declarations, First structural design, or edits to `.first` files.
+Use this skill when the user asks for First source, First declarations, First structural design, First-backed project scaffolding, edits to `.first` files, or implementation work in a project that has `src-first/`.
 
 Before writing First code, run [`scripts/update-docs.sh`](scripts/update-docs.sh) when network access is available, then read [`Tour.first`](Tour.first). Treat the tour as the authoritative working subset for now. The tour is intentionally more important than general programming-language instincts: do not import TypeScript, Rust, JavaScript, or Swift syntax unless the tour, a referenced First note, or the official First documentation establishes it.
 
@@ -26,6 +26,27 @@ The active subset is structural pre-programming:
 - primitive type names
 
 Do not introduce imports, extension classes, primitive classes, properties, ghosts, loops, pattern matching, conditionals, operators-heavy implementation logic, or other computation/control-flow syntax unless the user explicitly expands the subset.
+
+## First-Backed Projects
+
+In a project with `src-first/`, treat First as the structural source of truth.
+
+Before changing implementation artifacts, inspect the relevant First source when the request affects structure, behavior, data shape, lifecycle, public API, ownership, or invariants.
+
+If the request changes that structure or intent, update First before changing implementation artifacts. If the request is purely local implementation work, proceed without a First edit.
+
+## Scaffold Interaction
+
+When scaffolding a First project, infer as much as possible from the user’s request. Ask only for missing choices that materially affect the folder structure.
+
+Required decisions:
+- project name
+
+Always create exactly one `src-first/`. This is where the First lives.
+
+Create additional implementation targets as `src-<target>/` folders only when the user specifies them.
+
+Create an `AGENTS.md` that tells future agents to use this skill and to treat `src-first/` as the source of truth before implementation changes.
 
 ## References
 
