@@ -109,6 +109,7 @@ Primitive groups describe families of built-in primitives. They are mainly used 
 Use ownership markers in stored field types when the relationship matters.
 
 - `weak Target`: does not retain its target and can become `null`.
+- `Target or null`: an optional ordinary reference that retains its target while present. Optionality alone does not imply weak ownership. Use `weak Target` only when the field should not keep the object alive; weak references are already nullable.
 - `strong Target`: explicitly acknowledges a potentially retaining cycle.
 
 ```first

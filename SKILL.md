@@ -1,6 +1,6 @@
 ---
 name: first-code
-description: Write or revise First source, scaffold First-backed projects, and keep implementation work aligned with src-first.
+description: Write or revise First source, reverse-engineer existing systems into First, scaffold First-backed projects, and keep implementation work aligned with src-first.
 metadata:
   short-description: Write First structural code
 ---
@@ -13,7 +13,7 @@ Before writing First code, run [`scripts/update-docs.sh`](scripts/update-docs.sh
 
 ## Current Scope
 
-The active subset is structural pre-programming:
+The working subset emphasizes structure and intent, with dependencies and output targets included:
 
 - spaces and classes
 - anchors
@@ -24,8 +24,10 @@ The active subset is structural pre-programming:
 - `one of`, `many of`, and `one case of`
 - ownership markers in stored field types
 - primitive type names
+- imports, including quoted package names with required aliases
+- `declare target` and backend configuration
 
-Do not introduce imports, extension classes, primitive classes, properties, ghosts, loops, pattern matching, conditionals, operators-heavy implementation logic, or other computation/control-flow syntax unless the user explicitly expands the subset.
+For extension classes, primitive classes, properties, ghosts, or computation/control flow beyond the tour, consult the relevant official documentation before using them. The tour is a starting reference, not a reason to omit supported language features needed by the task.
 
 ## First-Backed Projects
 
@@ -45,6 +47,19 @@ Required decisions:
 Always create exactly one `src-first/`. This is where the First lives.
 
 Create additional implementation targets as `src-<target>/` folders only when the user specifies them.
+Represent requested outputs in First with `declare target`; folders alone do not select targets. Use explicit `path` configuration when the project requires a particular destination. Backend names are open lowercase identifiers; for agent generation, generate the requested language rather than treating absence of a prebuilt backend as a modeling blocker.
+
+## Dependencies And Generation Readiness
+
+Include the dependencies, deployment responsibilities, and external behavior needed for the requested implementation. Imports are allowed. Use canonical identifiers where possible; use `import "@supabase/supabase-js" as Supabase` for package names containing characters such as `@` or `/`. Quoted imports require an alias.
+
+When asked for implementation-ready First, check that its structure and anchors specify material behavior, dependencies, output targets, persistence operations, and credential ownership without leaving product decisions to guesswork. This is a planning check, not a demand for every implementation detail or a new language feature. Report concrete unresolved decisions; do not invent hypothetical language holes. A design review may support this check when requested.
+
+## Reverse-Engineering Existing Systems
+
+Read the relevant implementation, schemas, migrations, grants, API contracts, and deployment configuration before modeling an existing system. Record actual responsibilities, data shapes, dependencies, persistence behavior, and credential boundaries in First. Preserve exact external names when existing tables, buckets, packages, or APIs depend on them; use declarations for exact strings and semantic islands for anchor references.
+
+Distinguish observed behavior from intended changes. Record deliberate divergences in a separate corrections document with source evidence, so generating the intended system does not erase knowledge of what is currently deployed. Do not invent interface/implementation pairs or prescribe a `Persistable` base class as a language requirement. Keep operations requiring server credentials in the unit that owns those credentials. Represent real privilege distinctions in typed APIs when useful, while preserving the system's actual authorization checks.
 
 Create an `AGENTS.md` that tells future agents to use this skill and to treat `src-first/` as the source of truth before implementation changes.
 
@@ -52,7 +67,7 @@ Create an `AGENTS.md` that tells future agents to use this skill and to treat `s
 
 Read only what the task needs:
 
-- [`references/structural-subset.md`](references/structural-subset.md): exact declaration forms, anchors, and common hallucination traps.
+- [`references/structural-rules.md`](references/structural-rules.md): exact declaration forms, anchors, and common hallucination traps.
 - [`references/primitives.md`](references/primitives.md): primitive scalars, numeric families, fixed-decimal ranges, primitive groups, and ownership spelling.
 - [`references/source-style.md`](references/source-style.md): formatting and authoring rules for readable First files.
 

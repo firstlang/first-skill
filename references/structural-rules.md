@@ -34,6 +34,18 @@ User (
 - A declarative anchor states a fact, invariant, interpretation, or generation constraint.
 - A pending-question anchor marks a material choice that cannot be inferred safely.
 - Place behavior and invariants inside the member they govern.
+- Achors allow Unicode letters, marks, numbers, ordinary spaces, and `.`, `,`, `'`, `-`. `?` is permitted only at the end of a pending question.
+- Use brace-delimited semantic islands for references and resources; there is no general punctuation escape. Put exact names, paths, and URLs in declarations or supported resource islands rather than raw anchor prose.
+
+## Imports And Targets
+
+- Imports and `declare import` precede every other semantic member of their space or class, including `declare target`. Comments and anchors may precede or separate imports.
+- Imports are allowed at the project root and in spaces and classes, including shared spaces. Functions and runtime blocks cannot contain imports.
+- Canonical module imports use identifiers: `import Postgres as Database`.
+- Quote a package name that cannot be represented by a canonical identifier, and supply an alias: `import "@supabase/supabase-js" as Supabase`.
+- `declare target typescript` selects output for its containing space and descendants. Targets may appear at the project root or in spaces, not directly in classes or functions.
+- Declare multiple targets with separate declarations. A descendant inherits the enclosing target set unless it declares its own replacement set.
+- Optional configuration uses `declare target swift { path = "../src-swift", options = {} }`, though this should be formatted according to the rules, it is rendered here as a one-liner. Paths resolve from the First project root. Backend names are open lowercase identifiers; options belong to the backend.
 
 ## Functions
 
@@ -145,4 +157,4 @@ Selection bodies do not support fields, properties, ordinary constructors, neste
 - Do not use `T?` for optional parameters; use `= ?`.
 - Do not use `String`, `Boolean`, `Number`, or `Promise`.
 - Do not invent `readonly`, `public`, `protected`, `private constructor`, or TypeScript-style accessors in this subset.
-- Do not introduce imports or package syntax in this subset.
+- Do not substitute TypeScript named/default import syntax for First imports.

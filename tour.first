@@ -1,5 +1,7 @@
 Replier (
+	
 	// Source format
+	
 	- This file defines the Replier First subset for pre-programming.
 	- Use only the forms established by this tour before implementation begins.
 	- Emit anchors for descriptive content instead of comments.
@@ -59,7 +61,20 @@ Replier (
 	- Is introduces types.
 	- A function's parenthesized body encloses its anchors and implementation.
 	- Add a parenthesized body when a function needs anchors or an implementation.
-	- Imports and package access are deferred.
+	- Imports introduce dependencies and are allowed in First source.
+	- Use canonical module identifiers when possible.
+	- Quote package names containing characters that cannot occur in identifiers and supply an alias.
+	- The quoted import above demonstrates a scoped TypeScript package name.
+	- Imports precede other semantic members including target declarations.
+	- Imports may appear at the root or in spaces and classes but not inside executable bodies.
+	- Declare target selects the output backend for the enclosing space and descendants.
+	- Declare several targets with separate declarations.
+	- Nested explicit targets replace the inherited target set.
+	- Backend names are open lowercase identifiers and configuration options belong to the backend.
+	- Output paths resolve against the First project root.
+	- Raw anchor prose permits letters, marks, numbers, spaces, periods, commas, apostrophes, and hyphens.
+	- A question mark is permitted only at the end of a pending question.
+	- Place references and resources in supported brace-delimited semantic islands.
 	
 	// Primitive types
 	- Primitive types are explicit.
@@ -80,6 +95,19 @@ Replier (
 	- Big fixed decimal scales range from 1 through 64.
 	- Fixed-width integers and fixed decimals wrap on overflow.
 	
+	import "@supabase/supabase-js" as Supabase
+	
+	declare target typescript {
+		path = "src-typescript"
+		options = {
+			// Backend-specific compiler options go here
+		}
+	}
+	
+	declare target swift {
+		path = "src-swift"
+	}
+	
 	formatDocumentName(username is string) is string (
 		- Functions have lowercase names and typed parameters.
 		- A function return type is optional when reachable returns make it unambiguous.
@@ -94,7 +122,7 @@ Replier (
 		height is f64 = ?
 		allowsFileAccess is boolean = false
 		escapable is boolean = false) (
-		- Multiline parameter lists use newlines as separators and do not need comma tokens.
+		- Multiline parameter lists use newlines as separators and do not use comma tokens.
 	)
 	
 	startup (
@@ -237,5 +265,13 @@ Replier (
 			peer is field of strong WebViewHandle)
 	)
 	
-	- Do not use imports, extension classes, primitive classes, properties, ghosts, advanced selection composition, or unintroduced computation and control flow.
+	OptionalDocument (
+		- An optional ordinary reference retains its target while present.
+		- A weak reference permits its target to disappear even while this field exists.
+		constructor(
+			selected is field of Document or null
+			observed is field of weak Document)
+	)
+	
+	- Consult the official documentation before attempting to use features not introduced by this tour.
 )
