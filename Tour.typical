@@ -56,12 +56,12 @@ Replier (
 	// Standard library
 	- The standard library includes JavaScript and Node.js built-ins when implementation work is enabled.
 	- The TypeScript frontend includes browser DOM APIs when implementation work is enabled.
-	- Use the ordinary conceptual APIs of standard library built-ins unless a First-specific rule changes them.
+	- Use the ordinary conceptual APIs of standard library built-ins unless a Typical-specific rule changes them.
 	- A template element parses assigned HTML into an inert DocumentFragment.
 	- Is introduces types.
 	- A function's parenthesized body encloses its anchors and implementation.
 	- Add a parenthesized body when a function needs anchors or an implementation.
-	- Imports introduce dependencies and are allowed in First source.
+	- Imports introduce dependencies and are allowed in Typical source.
 	- Use canonical module identifiers when possible.
 	- Quote package names containing characters that cannot occur in identifiers and supply an alias.
 	- The quoted import above demonstrates a scoped TypeScript package name.

@@ -1,23 +1,23 @@
 ---
-name: first-code
-description: Write or revise First source, reverse-engineer existing systems into First, scaffold First-backed projects, and keep implementation work aligned with src-first.
+name: typical-code
+description: Write or revise Typical source, reverse-engineer existing systems into First, scaffold First-backed projects, and keep implementation work aligned with src-typical.
 metadata:
   short-description: Write First structural code
 ---
 
-# First Code
+# Typical Code
 
-Use this skill when the user asks for First source, First declarations, First structural design, First-backed project scaffolding, edits to `.first` files, or implementation work in a project that has `src-first/`.
+Use this skill when the user asks for Typical source, First declarations, First structural design, First-backed project scaffolding, edits to `.typical` files, or implementation work in a project that has `src-typical/`.
 
-Before writing First code, run [`scripts/update-docs.sh`](scripts/update-docs.sh) when network access is available, then read [`Tour.first`](Tour.first). Treat the tour as the authoritative working subset for now. The tour is intentionally more important than general programming-language instincts: do not import TypeScript, Rust, JavaScript, or Swift syntax unless the tour, a referenced First note, or the official First documentation establishes it.
+Before writing First code, run [`scripts/update-docs.sh`](scripts/update-docs.sh) when network access is available, then read [`Tour.typical`](Tour.typical). Treat the tour as the authoritative working subset for now. The tour is intentionally more important than general programming-language instincts: do not import TypeScript, Rust, JavaScript, or Swift syntax unless the tour, a referenced First note, or the official First documentation establishes it.
 
 ## Programmatic First Generation
 
-When generating First source programmatically, always use [First CodeDOM](https://github.com/firstlang/code-dom). Clone that repository into the project's permitted workspace before using it. CodeDOM is a separate repository and is not bundled with this skill. Read the cloned repository's `README.md` and `SKILL.md` for API usage and generation instructions.
+When generating Typical source programmatically, always use [Typical CodeDOM](https://github.com/firstlang/code-dom). Clone that repository into the project's permitted workspace before using it. CodeDOM is a separate repository and is not bundled with this skill. Read the cloned repository's `README.md` and `SKILL.md` for API usage and generation instructions.
 
 Build CodeDOM nodes, call its emitter, and write the returned source unchanged. A TypeScript generator may read inputs and call CodeDOM. Never assemble First syntax directly using Python, shell scripts, TypeScript string templates, concatenation, or another custom source printer. Do not bypass this requirement with whole declarations or files hidden in raw-source nodes, or by patching text after emission.
 
-If CodeDOM lacks a required construct, extend it when within scope or report the missing capability; do not silently fall back to handwritten generation. This requirement concerns generated First source, not unrelated output languages or ordinary manual edits to First files.
+If CodeDOM lacks a required construct, extend it when within scope or report the missing capability; do not silently fall back to handwritten generation. This requirement concerns generated Typical source, not unrelated output languages or ordinary manual edits to First files.
 
 ## Current Scope
 
@@ -39,9 +39,9 @@ For extensions, custom primitives, properties, ghosts, or computation/control fl
 
 ## First-Backed Projects
 
-In a project with `src-first/`, treat First as the structural source of truth.
+In a project with `src-typical/`, treat First as the structural source of truth.
 
-Before changing implementation artifacts, inspect the relevant First source when the request affects structure, behavior, data shape, lifecycle, public API, ownership, or invariants.
+Before changing implementation artifacts, inspect the relevant Typical source when the request affects structure, behavior, data shape, lifecycle, public API, ownership, or invariants.
 
 If the request changes that structure or intent, update First before changing implementation artifacts. If the request is purely local implementation work, proceed without a First edit.
 
@@ -56,7 +56,7 @@ When scaffolding a First project, infer as much as possible from the user’s re
 Required decisions:
 - project name
 
-Always create exactly one `src-first/`. This is where the First lives.
+Always create exactly one `src-typical/`. This is where the First lives.
 
 Create additional implementation targets as `src-<target>/` folders only when the user specifies them.
 Represent requested outputs in First with `declare target`; folders alone do not select targets. Use explicit `path` configuration when the project requires a particular destination. Backend names are open lowercase identifiers; for agent generation, generate the requested language rather than treating absence of a prebuilt backend as a modeling blocker.
@@ -73,7 +73,7 @@ Read the relevant implementation, schemas, migrations, grants, API contracts, an
 
 Distinguish observed behavior from intended changes. Record deliberate divergences in a separate corrections document with source evidence, so generating the intended system does not erase knowledge of what is currently deployed. Do not invent interface/implementation pairs or prescribe a `Persistable` base class as a language requirement. Keep operations requiring server credentials in the unit that owns those credentials. Represent real privilege distinctions in typed APIs when useful, while preserving the system's actual authorization checks.
 
-Create an `AGENTS.md` that tells future agents to use this skill and to treat `src-first/` as the source of truth before implementation changes.
+Create an `AGENTS.md` that tells future agents to use this skill and to treat `src-typical/` as the source of truth before implementation changes.
 
 ## References
 
@@ -95,5 +95,5 @@ Updated official docs are cached in [`downloaded-docs/`](downloaded-docs/) when 
 - Use declaration names in braces inside anchors when referring to code, such as `{DocumentStatus}`.
 - Do not invent concise aliases, punctuation, modifiers, or generic syntax.
 - Keep answers concise unless the user asks for the deeper rationale.
-- If you are unsure about syntax, use the cached official docs or download the documentation index at https://firstlang.dev/docs/index.txt.
+- If you are unsure about syntax, use the cached official docs or download the documentation index at https://typical.sh/docs/index.txt.
 - If the updater fails because network access is unavailable, continue from the local bundled docs and mention that the downloaded docs may be stale.

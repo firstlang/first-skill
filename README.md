@@ -1,4 +1,4 @@
-# First Code
+# Typical Code
 
 Coding skill for First.
 
@@ -7,7 +7,7 @@ Coding skill for First.
 In Codex, ask:
 
 ```text
-Install the skill from https://github.com/firstlang/first-skill
+Install the skill from https://github.com/firstlang/typical-skill
 ```
 
 Then start a new chat so Codex can load the newly installed skill.

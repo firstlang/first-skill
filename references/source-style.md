@@ -1,6 +1,6 @@
 # Source Style
 
-Read this before producing nontrivial `.first` files.
+Read this before producing nontrivial `.typical` files.
 
 ## Formatting
 
