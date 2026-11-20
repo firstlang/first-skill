@@ -1,23 +1,23 @@
 ---
 name: typical-code
-description: Write or revise Typical source, reverse-engineer existing systems into First, scaffold First-backed projects, and keep implementation work aligned with src-typical.
+description: Write or revise Typical source, reverse-engineer existing systems into Typical, scaffold Typical-backed projects, and keep implementation work aligned with src-typical.
 metadata:
-  short-description: Write First structural code
+  short-description: Write Typical structural code
 ---
 
 # Typical Code
 
-Use this skill when the user asks for Typical source, First declarations, First structural design, First-backed project scaffolding, edits to `.typical` files, or implementation work in a project that has `src-typical/`.
+Use this skill when the user asks for Typical source, Typical declarations, Typical structural design, Typical-backed project scaffolding, edits to `.typical` files, or implementation work in a project that has `src-typical/`.
 
-Before writing First code, run [`scripts/update-docs.sh`](scripts/update-docs.sh) when network access is available, then read [`Tour.typical`](Tour.typical). Treat the tour as the authoritative working subset for now. The tour is intentionally more important than general programming-language instincts: do not import TypeScript, Rust, JavaScript, or Swift syntax unless the tour, a referenced First note, or the official First documentation establishes it.
+Before writing Typical code, run [`scripts/update-docs.sh`](scripts/update-docs.sh) when network access is available, then read [`Tour.typical`](Tour.typical). Treat the tour as the authoritative working subset for now. The tour is intentionally more important than general programming-language instincts: do not import TypeScript, Rust, JavaScript, or Swift syntax unless the tour, a referenced Typical note, or the official Typical documentation establishes it.
 
-## Programmatic First Generation
+## Programmatic Typical Generation
 
-When generating Typical source programmatically, always use [Typical CodeDOM](https://github.com/firstlang/code-dom). Clone that repository into the project's permitted workspace before using it. CodeDOM is a separate repository and is not bundled with this skill. Read the cloned repository's `README.md` and `SKILL.md` for API usage and generation instructions.
+When generating Typical source programmatically, always use [Typical CodeDOM](https://github.com/typical-sh/code-dom). Clone that repository into the project's permitted workspace before using it. CodeDOM is a separate repository and is not bundled with this skill. Read the cloned repository's `README.md` and `SKILL.md` for API usage and generation instructions.
 
-Build CodeDOM nodes, call its emitter, and write the returned source unchanged. A TypeScript generator may read inputs and call CodeDOM. Never assemble First syntax directly using Python, shell scripts, TypeScript string templates, concatenation, or another custom source printer. Do not bypass this requirement with whole declarations or files hidden in raw-source nodes, or by patching text after emission.
+Build CodeDOM nodes, call its emitter, and write the returned source unchanged. A TypeScript generator may read inputs and call CodeDOM. Never assemble Typical syntax directly using Python, shell scripts, TypeScript string templates, concatenation, or another custom source printer. Do not bypass this requirement with whole declarations or files hidden in raw-source nodes, or by patching text after emission.
 
-If CodeDOM lacks a required construct, extend it when within scope or report the missing capability; do not silently fall back to handwritten generation. This requirement concerns generated Typical source, not unrelated output languages or ordinary manual edits to First files.
+If CodeDOM lacks a required construct, extend it when within scope or report the missing capability; do not silently fall back to handwritten generation. This requirement concerns generated Typical source, not unrelated output languages or ordinary manual edits to Typical files.
 
 ## Current Scope
 
@@ -37,13 +37,13 @@ The working subset emphasizes structure and intent, with dependencies and output
 
 For extensions, custom primitives, properties, ghosts, or computation/control flow beyond the tour, consult the relevant official documentation before using them. The tour is a starting reference, not a reason to omit supported language features needed by the task.
 
-## First-Backed Projects
+## Typical-Backed Projects
 
-In a project with `src-typical/`, treat First as the structural source of truth.
+In a project with `src-typical/`, treat Typical as the structural source of truth.
 
 Before changing implementation artifacts, inspect the relevant Typical source when the request affects structure, behavior, data shape, lifecycle, public API, ownership, or invariants.
 
-If the request changes that structure or intent, update First before changing implementation artifacts. If the request is purely local implementation work, proceed without a First edit.
+If the request changes that structure or intent, update Typical before changing implementation artifacts. If the request is purely local implementation work, proceed without a Typical edit.
 
 ## Printing Sketches
 
@@ -51,25 +51,25 @@ When asked to print a sketch or implement its target-language output, read [PRIN
 
 ## Scaffold Interaction
 
-When scaffolding a First project, infer as much as possible from the user’s request. Ask only for missing choices that materially affect the folder structure.
+When scaffolding a Typical project, infer as much as possible from the user’s request. Ask only for missing choices that materially affect the folder structure.
 
 Required decisions:
 - project name
 
-Always create exactly one `src-typical/`. This is where the First lives.
+Always create exactly one `src-typical/`. This is where the Typical lives.
 
 Create additional implementation targets as `src-<target>/` folders only when the user specifies them.
-Represent requested outputs in First with `declare target`; folders alone do not select targets. Use explicit `path` configuration when the project requires a particular destination. Backend names are open lowercase identifiers; for agent generation, generate the requested language rather than treating absence of a prebuilt backend as a modeling blocker.
+Represent requested outputs in Typical with `declare target`; folders alone do not select targets. Use explicit `path` configuration when the project requires a particular destination. Backend names are open lowercase identifiers; for agent generation, generate the requested language rather than treating absence of a prebuilt backend as a modeling blocker.
 
 ## Dependencies And Generation Readiness
 
 Include the dependencies, deployment responsibilities, and external behavior needed for the requested implementation. Imports are allowed. Use canonical identifiers where possible; use `import "@supabase/supabase-js" as Supabase` for package names containing characters such as `@` or `/`. Quoted imports require an alias.
 
-When asked for implementation-ready First, check that its structure and anchors specify material behavior, dependencies, output targets, persistence operations, and credential ownership without leaving product decisions to guesswork. This is a planning check, not a demand for every implementation detail or a new language feature. Report concrete unresolved decisions; do not invent hypothetical language holes. A design review may support this check when requested.
+When asked for implementation-ready Typical, check that its structure and anchors specify material behavior, dependencies, output targets, persistence operations, and credential ownership without leaving product decisions to guesswork. This is a planning check, not a demand for every implementation detail or a new language feature. Report concrete unresolved decisions; do not invent hypothetical language holes. A design review may support this check when requested.
 
 ## Reverse-Engineering Existing Systems
 
-Read the relevant implementation, schemas, migrations, grants, API contracts, and deployment configuration before modeling an existing system. Record actual responsibilities, data shapes, dependencies, persistence behavior, and credential boundaries in First. Preserve exact external names when existing tables, buckets, packages, or APIs depend on them; use declarations for exact strings and semantic islands for anchor references.
+Read the relevant implementation, schemas, migrations, grants, API contracts, and deployment configuration before modeling an existing system. Record actual responsibilities, data shapes, dependencies, persistence behavior, and credential boundaries in Typical. Preserve exact external names when existing tables, buckets, packages, or APIs depend on them; use declarations for exact strings and semantic islands for anchor references.
 
 Distinguish observed behavior from intended changes. Record deliberate divergences in a separate corrections document with source evidence, so generating the intended system does not erase knowledge of what is currently deployed. Do not invent interface/implementation pairs or prescribe a `Persistable` base class as a language requirement. Keep operations requiring server credentials in the unit that owns those credentials. Represent real privilege distinctions in typed APIs when useful, while preserving the system's actual authorization checks.
 
@@ -81,9 +81,9 @@ Read only what the task needs:
 
 - [`references/structural-rules.md`](references/structural-rules.md): exact declaration forms, anchors, and common hallucination traps.
 - [`references/primitives.md`](references/primitives.md): primitive scalars, numeric families, fixed-decimal ranges, primitive groups, and ownership spelling.
-- [`references/source-style.md`](references/source-style.md): formatting and authoring rules for readable First files.
+- [`references/source-style.md`](references/source-style.md): formatting and authoring rules for readable Typical files.
 
-If the needed rule is not covered here, consult the official First documentation from the project website or documentation repository. If the docs are unavailable or still ambiguous, ask the user or project maintainer instead of guessing.
+If the needed rule is not covered here, consult the official Typical documentation from the project website or documentation repository. If the docs are unavailable or still ambiguous, ask the user or project maintainer instead of guessing.
 
 Updated official docs are cached in [`downloaded-docs/`](downloaded-docs/) when the update script has run. Read only the downloaded docs relevant to the construct you need.
 

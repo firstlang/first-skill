@@ -2,7 +2,7 @@ Replier (
 	
 	// Source format
 	
-	- This file defines the Replier First subset for pre-programming.
+	- This file defines the Replier Typical subset for pre-programming.
 	- Use only the forms established by this tour before implementation begins.
 	- Emit anchors for descriptive content instead of comments.
 	- Use double-slash comments only as short headings that group anchors.
@@ -46,7 +46,7 @@ Replier (
 	- Ask Paul when a requirement, construct, semantic rule, API shape, or ownership decision is uncertain.
 	- Do not invent language features or widen this subset without direction.
 	- Do not substitute a familiar TypeScript rule unless this tour establishes it.
-	- Organize First by responsibility instead of source file.
+	- Organize Typical by responsibility instead of source file.
 	- A space is a named responsibility boundary.
 	- Nest spaces instead of encoding hierarchy in names.
 	- A declaration without a constructor or inheritance clause is a space.
@@ -71,7 +71,7 @@ Replier (
 	- Declare several targets with separate declarations.
 	- Nested explicit targets replace the inherited target set.
 	- Backend names are open lowercase identifiers and configuration options belong to the backend.
-	- Output paths resolve against the First project root.
+	- Output paths resolve against the Typical project root.
 	- Raw anchor prose permits letters, marks, numbers, spaces, periods, commas, apostrophes, and hyphens.
 	- A question mark is permitted only at the end of a pending question.
 	- Place references and resources in supported brace-delimited semantic islands.
@@ -145,7 +145,7 @@ Replier (
 	WebView (
 		- Private members are accessible only within the class.
 		- Async functions use is async and specify a non-null result type after async.
-		- First does not use Promise types.
+		- Typical does not use Promise types.
 		- Omit a function body when declaring an API shape only.
 		constructor
 		reload()
@@ -161,7 +161,7 @@ Replier (
 	Document (
 		- A declaration with constructor is a nominal reference class.
 		- Calling a class creates a value.
-		- First has no new keyword.
+		- Typical has no new keyword.
 		- A class has at most one constructor.
 		- Constructors can explicitly return a compatible instance.
 		- Constructors do not have visibility modifiers.

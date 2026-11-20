@@ -1,6 +1,6 @@
 # Structural Subset
 
-Read this when declaring or revising First structure.
+Read this when declaring or revising Typical structure.
 
 ## Spaces And Classes
 
@@ -10,12 +10,12 @@ Read this when declaring or revising First structure.
 - Spaces are responsibility boundaries, not files or ordinary namespaces.
 - Spaces cannot be constructed or used as types.
 - Classes introduce nominal types and are constructed by calling the class name.
-- First has no `new` keyword.
+- Typical has no `new` keyword.
 - Repeated declarations with the same logical parent, name, and kind merge structurally.
 - One space and one class with the same name may coexist under the same parent.
 - Put a class's same-name static-side space after the instance-side class.
 
-```first
+```typical
 User (
 	constructor(name is field of string)
 )
@@ -45,7 +45,7 @@ User (
 - Quote a package name that cannot be represented by a canonical identifier, and supply an alias: `import "@supabase/supabase-js" as Supabase`.
 - `declare target typescript` selects output for its containing space and descendants. Targets may appear at the project root or in spaces, not directly in classes or functions.
 - Declare multiple targets with separate declarations. A descendant inherits the enclosing target set unless it declares its own replacement set.
-- Optional configuration uses `declare target swift { path = "../src-swift", options = {} }`, though this should be formatted according to the rules, it is rendered here as a one-liner. Paths resolve from the First project root. Backend names are open lowercase identifiers; options belong to the backend.
+- Optional configuration uses `declare target swift { path = "../src-swift", options = {} }`, though this should be formatted according to the rules, it is rendered here as a one-liner. Paths resolve from the Typical project root. Backend names are open lowercase identifiers; options belong to the backend.
 
 ## Functions
 
@@ -55,10 +55,10 @@ User (
 - Return types follow the parameter list with `returns`: `name() returns Type`.
 - Bodies use parentheses, not braces.
 - A function can omit its body when declaring shape only.
-- Async functions use `returns async ResultType`; First does not spell async results as `Promise`.
+- Async functions use `returns async ResultType`; Typical does not spell async results as `Promise`.
 - Generic functions use leading parameters such as `identity(T is type, value is T) returns T`; do not use `identity<T>`.
 
-```first
+```typical
 formatName(name is string) returns string (
 	return name
 )
@@ -86,7 +86,7 @@ loadLabel() returns async string
 - Field initializers should be literals or a single named value.
 - Every stored field must be definitely assigned by construction.
 
-```first
+```typical
 Document (
 	status is DocumentStatus
 
@@ -105,7 +105,7 @@ Document (
 - A class may inherit from multiple classes: `Child is Left, Right (`.
 - Parent order matters.
 - A non-constructible space cannot be used as an inheritance parent.
-- First has no abstract classes, abstract constructors, or abstract members.
+- Typical has no abstract classes, abstract constructors, or abstract members.
 
 ## Selection Types
 
@@ -113,7 +113,7 @@ Use selections for closed structural choices.
 
 `one of` models one named identity, literal value, or value belonging to a listed type.
 
-```first
+```typical
 WebViewPresentation is one of (
 	hidden
 	visible
@@ -122,7 +122,7 @@ WebViewPresentation is one of (
 
 `many of` models zero or more named flags. Include `none` when the empty state needs a name.
 
-```first
+```typical
 WebViewCapability is many of (
 	none
 	load
@@ -132,7 +132,7 @@ WebViewCapability is many of (
 
 `one case of` models exactly one named case with optional payload.
 
-```first
+```typical
 DocumentStatus is one case of (
 	open()
 	accountMismatch(expected is string, authenticated is string)
@@ -142,7 +142,7 @@ DocumentStatus is one case of (
 
 Selection composition uses `or` in the header. Do not use body spreads.
 
-```first
+```typical
 ExtendedStatus is BaseStatus or one case of (
 	retryScheduled()
 )
@@ -157,4 +157,4 @@ Selection bodies do not support fields, properties, ordinary constructors, neste
 - Do not use `T?` for optional parameters; use `= ?`.
 - Do not use `String`, `Boolean`, `Number`, or `Promise`.
 - Do not invent `readonly`, `public`, `protected`, `private constructor`, or TypeScript-style accessors in this subset.
-- Do not substitute TypeScript named/default import syntax for First imports.
+- Do not substitute TypeScript named/default import syntax for Typical imports.

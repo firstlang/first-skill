@@ -9,7 +9,7 @@ Read this when choosing primitive types, writing field types, or defining select
 - `byte string`
 - `char`
 
-First does not have capitalized primitive object types such as `String`, `Boolean`, or `Number`.
+Typical does not have capitalized primitive object types such as `String`, `Boolean`, or `Number`.
 
 ## Integers
 
@@ -112,7 +112,7 @@ Use ownership markers in stored field types when the relationship matters.
 - `Target or null`: an optional ordinary reference that retains its target while present. Optionality alone does not imply weak ownership. Use `weak Target` only when the field should not keep the object alive; weak references are already nullable.
 - `strong Target`: explicitly acknowledges a potentially retaining cycle.
 
-```first
+```typical
 WebViewRelation (
 	constructor(
 		owner is field of weak Document

@@ -1,13 +1,13 @@
 # Typical Code
 
-Coding skill for First.
+Coding skill for Typical.
 
 ## Installation
 
 In Codex, ask:
 
 ```text
-Install the skill from https://github.com/firstlang/typical-skill
+Install the skill from https://github.com/typical-sh/typical-skill
 ```
 
 Then start a new chat so Codex can load the newly installed skill.

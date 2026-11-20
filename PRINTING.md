@@ -1,6 +1,6 @@
 # Printing a Sketch
 
-Printing is producing target-language implementation code from a First or Typical sketch. The sketch is the load-bearing structure of the system and the authoritative contract for the printed code. It is not a suggestion or a loose description to reinterpret during implementation.
+Printing is producing target-language implementation code from a Typical sketch. The sketch is the load-bearing structure of the system and the authoritative contract for the printed code. It is not a suggestion or a loose description to reinterpret during implementation.
 
 Printing implements the declared structure and fills in behavior under its anchors. A print must agree with both the sketch's declarations and its semantic requirements. Code that compiles but disagrees with the sketch is an incorrect print.
 
@@ -29,7 +29,7 @@ Implementation details left open by the sketch may be chosen during printing. Lo
 
 If implementation requires a different contract, the sketch needs correction before the printed code does. Do not silently compensate in the target language.
 
-Identify the mismatch, explain why the current sketch cannot express the required implementation, and update the sketch first within the user's authorized scope. Then bring the printed code into agreement. If the decision requires missing information, ask for that information rather than inventing a structural answer in the print.
+Identify the mismatch, explain why the current sketch cannot express the required implementation, and update the sketch within the user's authorized scope. Then bring the printed code into agreement. If the decision requires missing information, ask for that information rather than inventing a structural answer in the print.
 
 An unsupported backend or a missing deterministic verifier does not make the contract optional. Distinguish a tooling limitation from a defect in the sketch; do not weaken the design merely to bypass a tool limitation.
 

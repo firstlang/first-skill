@@ -7,7 +7,7 @@ docs_dir="$skill_dir/downloaded-docs"
 last_modified_file="$state_dir/last-modified.txt"
 index_file="$state_dir/index.txt"
 
-site_origin="https://firstlang.dev"
+site_origin="https://typical.sh"
 docs_last_modified_url="$site_origin/docs/last-modified.txt"
 docs_index_url="$site_origin/docs/index.txt"
 docs_archive_url="https://github.com/typical-sh/documentation/archive/refs/heads/master.tar.gz"

@@ -20,7 +20,7 @@ Read this before producing nontrivial `.typical` files.
 - Organize by responsibility, not by source file.
 - Nest spaces instead of encoding hierarchy into long names.
 
-## Authoring First In This Subset
+## Authoring Typical In This Subset
 
 - Start with structure and anchors before implementation.
 - Put a member's behavior and invariants inside that member.
@@ -28,4 +28,4 @@ Read this before producing nontrivial `.typical` files.
 - Omit bodies when declaring API shape only.
 - Add a parenthesized body when a function, constructor, or startup needs anchors or implementation.
 - Use exact primitive names from `references/primitives.md`.
-- Consult the official First documentation instead of guessing when syntax or semantics are not established by the tour or references. If the docs are unavailable or ambiguous, ask the user or project maintainer.
+- Consult the official Typical documentation instead of guessing when syntax or semantics are not established by the tour or references. If the docs are unavailable or ambiguous, ask the user or project maintainer.
