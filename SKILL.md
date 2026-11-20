@@ -49,6 +49,10 @@ If the request changes that structure or intent, update Typical before changing 
 
 When asked to print a sketch or implement its target-language output, read [PRINTING.md](PRINTING.md). The sketch is the authoritative contract: preserve its signatures, data, state, ownership, lifecycle, responsibilities, and anchored behavior. Correct required contract changes in the sketch before changing the printed code.
 
+## Printing Sketches
+
+When asked to print a sketch or implement its target-language output, read [PRINTING.md](PRINTING.md). The sketch is the authoritative contract: preserve its signatures, data, state, ownership, lifecycle, responsibilities, and anchored behavior. Correct required contract changes in the sketch before changing the printed code.
+
 ## Scaffold Interaction
 
 When scaffolding a Typical project, infer as much as possible from the user’s request. Ask only for missing choices that materially affect the folder structure.
@@ -75,6 +79,20 @@ Distinguish observed behavior from intended changes. Record deliberate divergenc
 
 Create an `AGENTS.md` that tells future agents to use this skill and to treat `src-typical/` as the source of truth before implementation changes.
 
+## Required review checks
+
+After drafting or revising Typical source, discover every `SKILL.md` recursively in `checks/` and run all of them before presenting the source as reviewed. Do not rely on a fixed list: newly added checks apply automatically.
+
+Launch a separate reviewer agent for each check, with its own context window. Give it the check skill, the relevant Typical source set (including related declarations), the user's requirements, and the local language references the check requests. Do not inherit the author's full conversation or supply the author's conclusions. Each reviewer reads only the references needed for its check, reports findings, and makes no edits. Run independent reviewers in parallel within the runtime's concurrency limit; queue the rest.
+
+The coordinator verifies findings against the source and requirements, corrects confirmed issues, and reruns affected checks in separate reviewer agents. Report unresolved findings and checks that could not complete. If delegation is unavailable, say so; sequential self-review is a fallback, not completion of the independent-agent review requirement. An empty checks folder is not a successful review.
+
+The checks are individual nested skills, discovered explicitly through this entry point. Run anchor classification first, then route imperative anchors to behavior review and declarative claims to responsibility review. Structural review can run alongside classification. Boundary review includes both anchor kinds. Give each reviewer its focused context package as described in [the review protocol](references/review-protocol.md); do not send every reviewer the whole repository.
+
+## Structure and anchor roles
+
+Typical is a structural contract, not prose decorated with code-shaped headings. Declare types, inputs, outputs, fields, and relationships using supported structure. Use anchors for remaining behavior, responsibilities, and constraints; do not repeat structural guarantees. Imperative anchors describe work that can expand into executable code at their position using available scope. Declarative anchors state responsibilities or constraints requiring agent judgment. Every accepted anchor must classify as exactly one kind; unresolved questions remain decisions to resolve. The sketch may be revised when implementation reveals a missing contract.
+
 ## References
 
 Read only what the task needs:
@@ -89,6 +107,7 @@ Updated official docs are cached in [`downloaded-docs/`](downloaded-docs/) when 
 
 ## Working Rules
 
+- Specify function and callable return types with `returns Type`, including `returns async Type` and `returns yield Type`. Keep `is` for parameter and field types, inheritance, and other declarations; do not use it for return types.
 - Specify function and callable return types with `returns Type`, including `returns async Type` and `returns yield Type`. Keep `is` for parameter and field types, inheritance, and other declarations; do not use it for return types.
 - Prefer anchors for intent and constraints when implementation syntax is not yet in scope.
 - Keep each anchor to one concise statement, inside the declaration it governs.
