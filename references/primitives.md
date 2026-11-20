@@ -41,7 +41,7 @@ For durable data and foreign boundaries, prefer a concrete width over a platform
 
 - `numeric` is a compile-time provisional numeric annotation.
 - `numeric` is not the same as `number`.
-- Do not use `numeric` as a primitive-class base.
+- Do not use `numeric` as a custom-primitive base.
 
 ## Floating-Point Types
 
@@ -90,7 +90,7 @@ The shorthand ranges above are exact: every integer scale in the stated range is
 
 ## Primitive Groups
 
-Primitive groups describe families of built-in primitives. They are mainly used as primitive-class bases or extension targets, but primitive classes/extensions are outside the current subset.
+Primitive groups describe families of built-in primitives. They are mainly used as custom-primitive bases or extension targets, but custom primitives and extensions are outside the current subset.
 
 - `AnyNumeric`: every integer, fixed decimal, float, arbitrary-precision number, and `char`.
 - `AnyInteger`: every fixed-width integer, `big`, and `char`.

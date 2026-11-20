@@ -108,7 +108,7 @@ Replier (
 		path = "src-swift"
 	}
 	
-	formatDocumentName(username is string) is string (
+	formatDocumentName(username is string) returns string (
 		- Functions have lowercase names and typed parameters.
 		- A function return type is optional when reachable returns make it unambiguous.
 		- Functions are the reusable executable behavior in this subset.
@@ -149,13 +149,13 @@ Replier (
 		- Omit a function body when declaring an API shape only.
 		constructor
 		reload()
-		loadLabel() is async string
+		loadLabel() returns async string
 	)
 	
 	WebView (
 		- This same-named space is WebView's static side.
 		- Static-side spaces do not have constructors.
-		createHidden() is WebView
+		createHidden() returns WebView
 	)
 	
 	Document (
@@ -272,6 +272,29 @@ Replier (
 			selected is field of Document or null
 			observed is field of weak Document)
 	)
+	
+	TextStyle is alias of {
+		- The alias of syntax is used to define an alias for an object shape or other type definition.
+		fontName is string
+		size is f64
+		weight is u16
+		italic is boolean
+		color is string
+	}
+	
+	TextLayout is alias of {
+		lineHeight is f64
+		letterSpacing is f64
+		textAlign is TextAlign
+	}
+	
+	TextAlign is one of (
+		left
+		center
+		right
+	)
+	
+	TextInfo is alias of TextLayout or TextAlign
 	
 	- Consult the official documentation before attempting to use features not introduced by this tour.
 )

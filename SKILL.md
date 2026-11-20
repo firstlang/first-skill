@@ -11,6 +11,14 @@ Use this skill when the user asks for First source, First declarations, First st
 
 Before writing First code, run [`scripts/update-docs.sh`](scripts/update-docs.sh) when network access is available, then read [`Tour.first`](Tour.first). Treat the tour as the authoritative working subset for now. The tour is intentionally more important than general programming-language instincts: do not import TypeScript, Rust, JavaScript, or Swift syntax unless the tour, a referenced First note, or the official First documentation establishes it.
 
+## Programmatic First Generation
+
+When generating First source programmatically, always use [First CodeDOM](https://github.com/firstlang/code-dom). Clone that repository into the project's permitted workspace before using it. CodeDOM is a separate repository and is not bundled with this skill. Read the cloned repository's `README.md` and `SKILL.md` for API usage and generation instructions.
+
+Build CodeDOM nodes, call its emitter, and write the returned source unchanged. A TypeScript generator may read inputs and call CodeDOM. Never assemble First syntax directly using Python, shell scripts, TypeScript string templates, concatenation, or another custom source printer. Do not bypass this requirement with whole declarations or files hidden in raw-source nodes, or by patching text after emission.
+
+If CodeDOM lacks a required construct, extend it when within scope or report the missing capability; do not silently fall back to handwritten generation. This requirement concerns generated First source, not unrelated output languages or ordinary manual edits to First files.
+
 ## Current Scope
 
 The working subset emphasizes structure and intent, with dependencies and output targets included:
@@ -27,7 +35,7 @@ The working subset emphasizes structure and intent, with dependencies and output
 - imports, including quoted package names with required aliases
 - `declare target` and backend configuration
 
-For extension classes, primitive classes, properties, ghosts, or computation/control flow beyond the tour, consult the relevant official documentation before using them. The tour is a starting reference, not a reason to omit supported language features needed by the task.
+For extensions, custom primitives, properties, ghosts, or computation/control flow beyond the tour, consult the relevant official documentation before using them. The tour is a starting reference, not a reason to omit supported language features needed by the task.
 
 ## First-Backed Projects
 
@@ -36,6 +44,10 @@ In a project with `src-first/`, treat First as the structural source of truth.
 Before changing implementation artifacts, inspect the relevant First source when the request affects structure, behavior, data shape, lifecycle, public API, ownership, or invariants.
 
 If the request changes that structure or intent, update First before changing implementation artifacts. If the request is purely local implementation work, proceed without a First edit.
+
+## Printing Sketches
+
+When asked to print a sketch or implement its target-language output, read [PRINTING.md](PRINTING.md). The sketch is the authoritative contract: preserve its signatures, data, state, ownership, lifecycle, responsibilities, and anchored behavior. Correct required contract changes in the sketch before changing the printed code.
 
 ## Scaffold Interaction
 
@@ -77,6 +89,7 @@ Updated official docs are cached in [`downloaded-docs/`](downloaded-docs/) when 
 
 ## Working Rules
 
+- Specify function and callable return types with `returns Type`, including `returns async Type` and `returns yield Type`. Keep `is` for parameter and field types, inheritance, and other declarations; do not use it for return types.
 - Prefer anchors for intent and constraints when implementation syntax is not yet in scope.
 - Keep each anchor to one concise statement, inside the declaration it governs.
 - Use declaration names in braces inside anchors when referring to code, such as `{DocumentStatus}`.

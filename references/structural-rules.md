@@ -21,7 +21,7 @@ User (
 )
 
 User (
-	find(identifier is string) is User
+	find(identifier is string) returns User
 )
 ```
 
@@ -52,18 +52,18 @@ User (
 - Function names are lowercase.
 - Parameters use `name is Type`.
 - A bare parameter means `unknown`, not type inference.
-- Return types follow the parameter list: `name() is Type`.
+- Return types follow the parameter list with `returns`: `name() returns Type`.
 - Bodies use parentheses, not braces.
 - A function can omit its body when declaring shape only.
-- Async functions use `is async ResultType`; First does not spell async results as `Promise`.
-- Generic functions use leading parameters such as `identity(T is type, value is T) is T`; do not use `identity<T>`.
+- Async functions use `returns async ResultType`; First does not spell async results as `Promise`.
+- Generic functions use leading parameters such as `identity(T is type, value is T) returns T`; do not use `identity<T>`.
 
 ```first
-formatName(name is string) is string (
+formatName(name is string) returns string (
 	return name
 )
 
-loadLabel() is async string
+loadLabel() returns async string
 ```
 
 ## Startup
